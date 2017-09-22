@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Knight from './components/Knight';
+import Board from './components/Board';
 
 export default class App extends Component {
-  render() {
-    return (
-      <Knight/>
-    );
-  }
+    render() {
+        return (
+            <Board knightPosition={[7, 4]} />
+        );
+    }
 }
