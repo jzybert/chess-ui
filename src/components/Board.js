@@ -14,7 +14,7 @@ class Board extends Component {
 
         const [knightX, knightY] = this.props.knightPosition;
         const piece = (x === knightX && y === knightY) ?
-            <Knight /> :
+            <Knight isBlack={true}/> :
             null;
 
         return (
