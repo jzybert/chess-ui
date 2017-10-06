@@ -6,8 +6,7 @@ import Square from './Square';
 import Knight from './Knight';
 import {canMoveKnight, moveKnight} from './Game';
 
-@DragDropContext(HTML5Backend)
-export default class Board extends Component {
+class Board extends Component {
     renderSquare(i) {
         const x = i % 8;
         const y = Math.floor(i / 8);
@@ -59,3 +58,5 @@ Board.propTypes = {
         PropTypes.number.isRequired
     ).isRequired
 };
+
+export default DragDropContext(HTML5Backend)(Board);
