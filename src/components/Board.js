@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import {DragDropContext} from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import PropTypes from 'prop-types';
 import Square from './Square';
 import Knight from './Knight';
 import {canMoveKnight, moveKnight} from './Game';
 
+@DragDropContext(HTML5Backend)
 export default class Board extends Component {
     renderSquare(i) {
         const x = i % 8;
