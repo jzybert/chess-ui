@@ -27,17 +27,17 @@ class Board extends Component {
                 <div key={index}
                      style={{width: '12.5%', height: '12.5%'}}>
                     <BoardSquare x={x} y={y}>
-                        {this.renderPiece(pieceType, isBlack)}
+                        {this.renderPiece(x, y, pieceType, isBlack)}
                     </BoardSquare>
                 </div>
             );
         }
     }
 
-    renderPiece(pieceType, isBlack) {
+    renderPiece(x, y, pieceType, isBlack) {
         if (pieceType !== 0) {
             return (
-                <Piece
+                <Piece x={x} y={y}
                     isBlack={isBlack}
                     pieceType={pieceType}
                 />
@@ -46,6 +46,7 @@ class Board extends Component {
     }
 
     render() {
+        console.log(this.props);
         const squares = [];
         for (let i = 0; i < 64; i++) {
             squares.push(this.renderSquare(i));
@@ -66,7 +67,7 @@ class Board extends Component {
 
 const mapStateToProps = state => {
     return {
-        piecePositions: state
+        piecePositions: state.positions
     }
 };
 

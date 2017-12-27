@@ -6,7 +6,10 @@ import {getIcon} from '../util/util';
 
 const pieceSource = {
     beginDrag(props) {
-        return {};
+        return {
+            x: props.x,
+            y: props.y
+        };
     }
 };
 

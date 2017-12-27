@@ -1,9 +1,9 @@
 import {MOVE_PIECE} from '../consts/types';
 
-export const movePiece = (piece, color) => {
+export const movePiece = (from, to) => {
     return {
         type: MOVE_PIECE,
-        piece,
-        color
+        from,
+        to
     }
 };
