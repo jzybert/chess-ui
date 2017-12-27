@@ -1,35 +1,37 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import PropTypes from 'prop-types';
 import BoardSquare from './BoardSquare';
 import Piece from './Piece';
 import {Colors} from '../consts/colors';
 
 class Board extends Component {
     renderSquare(index) {
-        const x = index % 8;
-        const y = Math.floor(index / 8);
+        if (this.props.piecePositions) {
+            const x = index % 8;
+            const y = Math.floor(index / 8);
 
-        let pieceType = 0;
-        let isBlack = true;
-        for (let i = 0; i < this.props.piecePositions.length; i++) {
-            const [pieceX, pieceY] = this.props.piecePositions[i].position;
-            if (pieceX === x && pieceY === y) {
-                pieceType = this.props.piecePositions[i].piece;
-                isBlack = this.props.piecePositions[i].color === Colors.BLACK;
-                break;
+            let pieceType = 0;
+            let isBlack = true;
+            for (let i = 0; i < this.props.piecePositions.length; i++) {
+                const [pieceX, pieceY] = this.props.piecePositions[i].position;
+                if (pieceX === x && pieceY === y) {
+                    pieceType = this.props.piecePositions[i].piece;
+                    isBlack = this.props.piecePositions[i].color === Colors.BLACK;
+                    break;
+                }
             }
-        }
 
-        return (
-            <div key={index}
-                 style={{ width: '12.5%', height: '12.5%' }}>
-                <BoardSquare x={x} y={y}>
-                    {this.renderPiece(pieceType, isBlack)}
-                </BoardSquare>
-            </div>
-        );
+            return (
+                <div key={index}
+                     style={{width: '12.5%', height: '12.5%'}}>
+                    <BoardSquare x={x} y={y}>
+                        {this.renderPiece(pieceType, isBlack)}
+                    </BoardSquare>
+                </div>
+            );
+        }
     }
 
     renderPiece(pieceType, isBlack) {
@@ -62,9 +64,10 @@ class Board extends Component {
     }
 }
 
-Board.propTypes = {
-    piecePositions: PropTypes.arrayOf(PropTypes.object).isRequired
-
+const mapStateToProps = state => {
+    return {
+        piecePositions: state
+    }
 };
 
-export default DragDropContext(HTML5Backend)(Board);
+export default connect(mapStateToProps, null)(DragDropContext(HTML5Backend)(Board));
