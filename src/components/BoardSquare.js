@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Square from './Square';
-import {ItemTypes} from './ItemTypes';
+import {ItemTypes} from '../consts/ItemTypes';
 import {DropTarget} from 'react-dnd';
 
 const squareTarget = {

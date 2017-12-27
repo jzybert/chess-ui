@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {DragSource} from 'react-dnd';
 import PropTypes from 'prop-types';
-import {ItemTypes} from './ItemTypes';
-import {getIcon} from '../util';
+import {ItemTypes} from '../consts/ItemTypes';
+import {getIcon} from '../util/util';
 
 const pieceSource = {
     beginDrag(props) {

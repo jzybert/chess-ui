@@ -1,5 +1,5 @@
-import {ItemTypes} from './components/ItemTypes';
-import {Colors} from './Colors';
+import {ItemTypes} from '../consts/ItemTypes';
+import {Colors} from '../consts/colors';
 
 export function getIcon(pieceType, isBlack) {
     if (isBlack) {
