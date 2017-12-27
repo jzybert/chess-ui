@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import BoardSquare from './BoardSquare';
 import Piece from './Piece';
 import {Colors} from '../consts/colors';
-import ItemTypes from '../consts/ItemTypes';
 
 class Board extends Component {
     renderSquare(index) {
