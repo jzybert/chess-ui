@@ -6,16 +6,11 @@ import Board from './components/Board';
 import board from './reducers/board';
 import {ItemTypes} from './components/ItemTypes';
 import {Colors} from './Colors';
+import {getPiecePositions} from './util';
 
 let store = createStore(board);
 
-let positions = [
-    {
-        color: Colors.BLACK,
-        piece: ItemTypes.KNIGHT,
-        position: [0, 0]
-    }
-];
+let positions = getPiecePositions();
 
 ReactDOM.render(
     <Provider store={store}>
