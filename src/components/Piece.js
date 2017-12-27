@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {DragSource} from 'react-dnd';
 import PropTypes from 'prop-types';
 import {ItemTypes} from './ItemTypes';
+import {getIcon} from '../util';
 
-const knightSource = {
+const pieceSource = {
     beginDrag(props) {
         return {};
     }
@@ -16,10 +17,11 @@ function collect(connect, monitor) {
     }
 }
 
-class Knight extends Component {
+class Piece extends Component {
     render() {
-        const {connectDragSource, isDragging, isBlack} = this.props;
-        let knight = isBlack ? <span>♞</span> : <span>♘</span>;
+        const {connectDragSource, isDragging, isBlack, pieceType} = this.props;
+        let icon = getIcon(pieceType, isBlack);
+        let piece = <span>{icon}</span>;
         return connectDragSource(
             <div style={{
                 opacity: isDragging ? 0.5 : 1,
@@ -27,16 +29,17 @@ class Knight extends Component {
                 fontWeight: 'bold',
                 cursor: 'move'
             }}>
-                {knight}
+                {piece}
             </div>
         );
     }
 }
 
-Knight.propTypes = {
+Piece.propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired,
-    isBlack: PropTypes.bool.isRequired
+    isBlack: PropTypes.bool.isRequired,
+    pieceType: PropTypes.string.isRequired
 };
 
-export default DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight);
+export default DragSource(ItemTypes.PIECE, pieceSource, collect)(Piece);
