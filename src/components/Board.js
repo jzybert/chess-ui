@@ -46,7 +46,6 @@ class Board extends Component {
     }
 
     render() {
-        console.log(this.props);
         const squares = [];
         for (let i = 0; i < 64; i++) {
             squares.push(this.renderSquare(i));
