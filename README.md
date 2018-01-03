@@ -1,5 +1,3 @@
-# Chess Game
+# UI for Chess
 
-# React JavaScript
-
-#### *Currently a work in progress.*
+This is a work-in-progress chess UI written in React-Redux JavaScript.
