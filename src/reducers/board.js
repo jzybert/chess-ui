@@ -1,4 +1,4 @@
-import {MOVE_PIECE} from '../consts/types';
+import {MOVE_PIECE, REMOVE_PIECE} from '../consts/types';
 import {getPiecePositions} from '../util/util';
 
 let positions = {
@@ -11,7 +11,7 @@ function copyState(state) {
 
 const board = (state = positions, action) => {
     switch (action.type) {
-        case MOVE_PIECE:
+        case MOVE_PIECE: {
             let stateCopy = copyState(state);
             let [fromX, fromY] = action.from;
             let positions = stateCopy.positions;
@@ -28,6 +28,24 @@ const board = (state = positions, action) => {
                     ...movedPositions
                 ]
             });
+        }
+        case REMOVE_PIECE: {
+            let stateCopy = copyState(state);
+            let pieceIndex = stateCopy.positions.findIndex(piece => {
+                let [x, y] = piece.position;
+                return x === action.x && y === action.y;
+            });
+            if (pieceIndex !== -1) {
+                stateCopy.positions.slice(pieceIndex, pieceIndex + 1);
+                return Object.assign({}, state, {
+                    positions: [
+                        ...stateCopy.positions
+                    ]
+                });
+            } else {
+                return state;
+            }
+        }
         default:
             return state;
     }

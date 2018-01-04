@@ -4,7 +4,7 @@ import {DropTarget} from 'react-dnd';
 import PropTypes from 'prop-types';
 import Square from './Square';
 import {ItemTypes} from '../consts/ItemTypes';
-import {movePiece} from '../actions/movements';
+import {movePiece, removePiece} from '../actions/movements';
 
 const squareTarget = {
     canDrop(props) {
@@ -13,6 +13,7 @@ const squareTarget = {
 
     drop(props, monitor) {
         let piece = monitor.getItem();
+        props.removePiece(props.x, props.y);
         props.movePiece([piece.x, piece.y], [props.x, props.y])
     }
 };
@@ -48,6 +49,9 @@ const mapDispatchToProps = dispatch => {
     return {
         movePiece(from, to) {
             dispatch(movePiece(from, to))
+        },
+        removePiece(x, y) {
+            dispatch(removePiece(x, y))
         }
     }
 };
