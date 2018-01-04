@@ -40,7 +40,7 @@ const board = (state = initialState, action) => {
                 return x === action.x && y === action.y;
             });
             if (pieceIndex !== -1) {
-                captured.push(positions.splice(pieceIndex, 1));
+                captured.push(positions.splice(pieceIndex, 1)[0]);
                 console.log(stateCopy);
                 return Object.assign({}, state, {
                     positions: [
