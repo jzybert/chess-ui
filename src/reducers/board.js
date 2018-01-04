@@ -31,15 +31,17 @@ const board = (state = positions, action) => {
         }
         case REMOVE_PIECE: {
             let stateCopy = copyState(state);
-            let pieceIndex = stateCopy.positions.findIndex(piece => {
+            let positions = stateCopy.positions;
+
+            let pieceIndex = positions.findIndex(piece => {
                 let [x, y] = piece.position;
                 return x === action.x && y === action.y;
             });
             if (pieceIndex !== -1) {
-                stateCopy.positions.slice(pieceIndex, pieceIndex + 1);
+                positions.splice(pieceIndex, 1);
                 return Object.assign({}, state, {
                     positions: [
-                        ...stateCopy.positions
+                        ...positions
                     ]
                 });
             } else {
