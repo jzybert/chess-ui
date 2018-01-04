@@ -25,7 +25,7 @@ class Board extends Component {
 
             return (
                 <div key={index}
-                     style={{width: '12.5%', height: '12.5%'}}>
+                     style={{width: '50px', height: '50px'}}>
                     <BoardSquare x={x} y={y}>
                         {this.renderPiece(x, y, pieceType, isBlack)}
                     </BoardSquare>
@@ -53,8 +53,8 @@ class Board extends Component {
 
         return (
             <div style={{
-                width: '100%',
-                height: '100%',
+                width: '400px',
+                height: '400px',
                 display: 'flex',
                 flexWrap: 'wrap'
             }}>
