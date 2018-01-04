@@ -1,15 +1,16 @@
 import {MOVE_PIECE, REMOVE_PIECE} from '../consts/types';
 import {getPiecePositions} from '../util/util';
 
-let positions = {
-    positions: getPiecePositions()
+let initialState = {
+    positions: getPiecePositions(),
+    capturedPieces: []
 };
 
 function copyState(state) {
     return Object.assign({}, state);
 }
 
-const board = (state = positions, action) => {
+const board = (state = initialState, action) => {
     switch (action.type) {
         case MOVE_PIECE: {
             let stateCopy = copyState(state);
@@ -32,16 +33,21 @@ const board = (state = positions, action) => {
         case REMOVE_PIECE: {
             let stateCopy = copyState(state);
             let positions = stateCopy.positions;
+            let captured = stateCopy.capturedPieces;
 
             let pieceIndex = positions.findIndex(piece => {
                 let [x, y] = piece.position;
                 return x === action.x && y === action.y;
             });
             if (pieceIndex !== -1) {
-                positions.splice(pieceIndex, 1);
+                captured.push(positions.splice(pieceIndex, 1));
+                console.log(stateCopy);
                 return Object.assign({}, state, {
                     positions: [
                         ...positions
+                    ],
+                    capturedPieces: [
+                        ...captured
                     ]
                 });
             } else {
