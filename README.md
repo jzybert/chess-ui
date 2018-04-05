@@ -1,3 +1,4 @@
-# UI for Chess
+# User Interface for Chess
 
-This is a work-in-progress chess UI written in React-Redux JavaScript.
+This project contains a Node.js front-end which allows for the movement
+of a normal set-up of a chess game.
