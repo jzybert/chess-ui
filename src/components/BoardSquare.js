@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Square from './Square';
 import {ItemTypes} from '../consts/ItemTypes';
 import {movePiece, removePiece} from '../actions/movements';
+import fetch from 'isomorphic-fetch'
 
 const squareTarget = {
     canDrop(props) {
@@ -13,8 +14,17 @@ const squareTarget = {
 
     drop(props, monitor) {
         let piece = monitor.getItem();
-        props.removePiece(props.x, props.y);
-        props.movePiece([piece.x, piece.y], [props.x, props.y])
+        let data = new FormData();
+        data.append('test', 5);
+        fetch('http://127.0.0.1:5000/can_move', {
+            method: 'POST',
+            body: data
+        }).then(response => {
+            return response.json();
+        }).then(myJson => {
+            props.removePiece(props.x, props.y);
+            props.movePiece([piece.x, piece.y], [props.x, props.y]);
+        });
     }
 };
 
